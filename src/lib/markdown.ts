@@ -62,6 +62,17 @@ export function renderMarkdown(markdown: string): {
 
   const renderer = new Renderer();
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
+  renderer.image = ({ href, title, text }) => {
+    const resolvedHref =
+      href && href.startsWith('/') && !href.startsWith('//') && basePath
+        ? `${basePath}${href}`
+        : href;
+    const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
+    return `<img src="${escapeHtml(resolvedHref)}" alt="${escapeHtml(text || '')}"${titleAttr} />`;
+  };
+
   renderer.heading = ({ text, depth }) => {
     const cleanText = text.replace(/<[^>]*>/g, '').replace(/`/g, '');
     let id = slugifyHeading(cleanText);

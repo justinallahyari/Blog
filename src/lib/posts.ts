@@ -27,6 +27,15 @@ export function getAllPosts(includeDrafts = false): Post[] {
 
     // Validate frontmatter strictly against Zod schema
     const parsedFrontmatter = PostFrontmatterSchema.parse(data);
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    if (
+      parsedFrontmatter.heroImage &&
+      parsedFrontmatter.heroImage.startsWith('/') &&
+      !parsedFrontmatter.heroImage.startsWith('//') &&
+      basePath
+    ) {
+      parsedFrontmatter.heroImage = `${basePath}${parsedFrontmatter.heroImage}`;
+    }
     const { html, toc } = renderMarkdown(content);
     const { readingTime, readingMinutes } = calculateReadingTime(content);
 

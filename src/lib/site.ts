@@ -1,20 +1,22 @@
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const siteConfig = {
   name: "Justin Allahyari — IT Systems Architect & Enterprise Technologist",
   shortName: "Justin Allahyari",
   description:
     "Portfolio, resume, and blog of Justin Allahyari — Help Desk Technician at Toray Advanced Composites and Management Information Systems student at San José State University.",
-  url: "https://justinallahyari.dev",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://justinallahyari.github.io/Blog",
   author: {
     name: "Justin Allahyari",
     role: "Help Desk Technician & IT System Architect",
     subtitle: "MIS @ San José State University · Toray Advanced Composites",
     bio: "I'm currently balancing full-time Business Management (MIS) studies at San José State University with a role as a Help Desk Technician at Toray Advanced Composites. I get hands-on with technical support, enterprise application architecture, RBAC/SSO integrations, and DoD compliance while leading end-to-end IT deployments.",
-    avatar: "/images/justin-avatar.jpg",
+    avatar: `${basePath}/images/justin-avatar.jpg`,
     location: "Saratoga, California, USA",
     phone: "(408) 442-0741",
     email: "justinallahyari@yahoo.com",
-    resumeUrl: "/resume.pdf",
-    github: "https://github.com",
+    resumeUrl: `${basePath}/resume.pdf`,
+    github: "https://github.com/justinallahyari",
     linkedin: "https://www.linkedin.com",
     twitter: "https://x.com",
     rss: "/rss.xml",
