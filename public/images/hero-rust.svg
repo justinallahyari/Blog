@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <rect width="800" height="420" rx="20" fill="#090d16" />
+  <rect x="80" y="120" width="180" height="180" rx="16" fill="#1e293b" stroke="#f97316" stroke-width="3" />
+  <text x="170" y="215" text-anchor="middle" fill="#f8fafc" font-family="monospace" font-size="16">Worker Queue A</text>
+  <rect x="310" y="120" width="180" height="180" rx="16" fill="#1e293b" stroke="#38bdf8" stroke-width="3" />
+  <text x="400" y="215" text-anchor="middle" fill="#f8fafc" font-family="monospace" font-size="16">Scheduler Poll</text>
+  <rect x="540" y="120" width="180" height="180" rx="16" fill="#1e293b" stroke="#a855f7" stroke-width="3" />
+  <text x="630" y="215" text-anchor="middle" fill="#f8fafc" font-family="monospace" font-size="16">Worker Queue B</text>
+</svg>

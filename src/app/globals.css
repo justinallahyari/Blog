@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-indigo-500 selection:text-white;
+  }
+}
+
+/* Syntax Highlighting Tokens */
+.token-comment {
+  color: #64748b;
+  font-style: italic;
+}
+.token-string {
+  color: #34d399;
+}
+.token-keyword {
+  color: #818cf8;
+  font-weight: 600;
+}
+.token-boolean {
+  color: #f472b6;
+}
+.token-number {
+  color: #fbbf24;
+}

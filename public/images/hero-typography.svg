@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <rect width="800" height="420" rx="20" fill="#0f172a" />
+  <text x="100" y="160" fill="#f8fafc" font-family="sans-serif" font-size="48" font-weight="bold">Aa Bb Cc — 65ch</text>
+  <rect x="100" y="200" width="600" height="16" rx="8" fill="#38bdf8" fill-opacity="0.7" />
+  <rect x="100" y="236" width="520" height="16" rx="8" fill="#818cf8" fill-opacity="0.5" />
+  <rect x="100" y="272" width="560" height="16" rx="8" fill="#94a3b8" fill-opacity="0.4" />
+</svg>
