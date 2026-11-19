@@ -8,10 +8,8 @@ export const PostFrontmatterSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
-  heroImage: z.string().optional(),
   tags: z.array(z.string()).default([]),
   draft: z.boolean().default(false),
-  featured: z.boolean().optional().default(false),
 });
 
 export type PostFrontmatter = z.infer<typeof PostFrontmatterSchema>;
@@ -28,7 +26,6 @@ export interface Post {
   content: string;
   html: string;
   readingTime: string;
-  readingMinutes: number;
   toc: TocItem[];
 }
 
@@ -41,4 +38,3 @@ export function formatDate(date: Date | string): string {
     timeZone: 'UTC',
   }).format(d);
 }
-

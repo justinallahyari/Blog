@@ -55,105 +55,99 @@ export function BlogExplorer({
 
   return (
     <div className="space-y-8">
-      {/* Search and Tag Filter Controls */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/50 p-4 sm:p-6">
-        <div className="relative">
-          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-          <input
-            type="search"
-            value={query}
-            onChange={handleSearchChange}
-            placeholder="Search articles by title, topic, or keyword..."
-            aria-label="Search articles"
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 pl-10 pr-10 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
-          />
-          {query && (
-            <button
-              type="button"
-              onClick={() => {
-                setQuery("");
-                setCurrentPage(1);
-              }}
-              aria-label="Clear search"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          )}
-        </div>
+      {posts.length > 1 && (
+        <div className="space-y-3">
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-subtle" />
+            <input
+              type="search"
+              value={query}
+              onChange={handleSearchChange}
+              placeholder="Search posts..."
+              aria-label="Search posts"
+              className="w-full rounded-md border border-line bg-surface pl-9 pr-9 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-accent focus:outline-none"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery("");
+                  setCurrentPage(1);
+                }}
+                aria-label="Clear search"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-subtle hover:text-ink"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => handleTagSelect(null)}
-            className={`rounded-lg px-3 py-1 text-xs font-medium transition-colors ${
-              selectedTag === null
-                ? "bg-indigo-600 text-white shadow-sm"
-                : "bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-          >
-            All ({posts.length})
-          </button>
-          {allTags.map(({ tag, count }) => (
+          <div className="flex flex-wrap items-center gap-1.5">
             <button
-              key={tag}
               type="button"
-              onClick={() =>
-                handleTagSelect(selectedTag === tag ? null : tag)
-              }
-              className={`rounded-lg px-3 py-1 text-xs font-medium transition-colors ${
-                selectedTag === tag
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
+              onClick={() => handleTagSelect(null)}
+              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+                selectedTag === null
+                  ? "bg-accent text-white dark:text-[#0B1324]"
+                  : "border border-line text-ink-muted hover:border-accent hover:text-accent"
               }`}
             >
-              #{tag} ({count})
+              All ({posts.length})
             </button>
-          ))}
+            {allTags.map(({ tag, count }) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() =>
+                  handleTagSelect(selectedTag === tag ? null : tag)
+                }
+                className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+                  selectedTag === tag
+                    ? "bg-accent text-white dark:text-[#0B1324]"
+                    : "border border-line text-ink-muted hover:border-accent hover:text-accent"
+                }`}
+              >
+                {tag} ({count})
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Results list */}
       {paginatedPosts.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 p-12 text-center">
-          <p className="text-base font-medium text-slate-700 dark:text-slate-300">
-            No matching articles found.
-          </p>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Try clearing your search query or selecting a different tag.
-          </p>
+        <div className="border-t border-line py-10 text-sm text-ink-subtle">
+          No matching posts found.
         </div>
       ) : (
-        <div className="grid gap-6">
+        <div className="divide-y divide-line">
           {paginatedPosts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
         </div>
       )}
 
-      {/* Pagination when posts exceed pageSize (10) */}
       {totalPages > 1 && (
         <nav
           aria-label="Blog pagination"
-          className="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-6"
+          className="flex items-center justify-between border-t border-line pt-6"
         >
           <button
             type="button"
             disabled={safePage <= 1}
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-800 px-3.5 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 disabled:opacity-40 hover:bg-slate-100 dark:hover:bg-slate-900"
+            className="inline-flex items-center gap-1 rounded-md border border-line px-3 py-1.5 text-sm text-ink-muted disabled:opacity-40 hover:border-accent hover:text-accent"
           >
             <ChevronLeft className="h-4 w-4" />
             Previous
           </button>
-          <span className="text-sm text-slate-600 dark:text-slate-400">
-            Page <strong>{safePage}</strong> of <strong>{totalPages}</strong>
+          <span className="text-xs text-ink-subtle tabular-nums">
+            Page {safePage} of {totalPages}
           </span>
           <button
             type="button"
             disabled={safePage >= totalPages}
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-800 px-3.5 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 disabled:opacity-40 hover:bg-slate-100 dark:hover:bg-slate-900"
+            className="inline-flex items-center gap-1 rounded-md border border-line px-3 py-1.5 text-sm text-ink-muted disabled:opacity-40 hover:border-accent hover:text-accent"
           >
             Next
             <ChevronRight className="h-4 w-4" />

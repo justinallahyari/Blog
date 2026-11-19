@@ -3,30 +3,55 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-paper: 248 250 252;
+    --color-surface: 255 255 255;
+    --color-ink: 15 29 58;
+    --color-ink-muted: 53 71 102;
+    --color-ink-subtle: 92 111 142;
+    --color-line: 220 227 238;
+    --color-accent: 15 118 110;
+    --color-accent-hover: 17 94 89;
+    --color-accent-soft: 230 244 242;
+  }
+
+  .dark {
+    --color-paper: 11 19 36;
+    --color-surface: 17 28 51;
+    --color-ink: 237 242 250;
+    --color-ink-muted: 184 198 220;
+    --color-ink-subtle: 136 154 184;
+    --color-line: 30 46 77;
+    --color-accent: 45 212 191;
+    --color-accent-hover: 94 234 212;
+    --color-accent-soft: 17 42 54;
+  }
+
   html {
     scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   body {
-    @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-indigo-500 selection:text-white;
+    @apply bg-paper text-ink antialiased selection:bg-accent selection:text-white;
   }
 }
 
 /* Syntax Highlighting Tokens */
 .token-comment {
-  color: #64748b;
+  color: #889ab8;
   font-style: italic;
 }
 .token-string {
-  color: #34d399;
+  color: #5eead4;
 }
 .token-keyword {
-  color: #818cf8;
+  color: #93c5fd;
   font-weight: 600;
 }
 .token-boolean {
-  color: #f472b6;
+  color: #fca5a5;
 }
 .token-number {
-  color: #fbbf24;
+  color: #fcd34d;
 }

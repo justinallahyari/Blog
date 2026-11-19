@@ -25,19 +25,9 @@ export function getAllPosts(includeDrafts = false): Post[] {
     const rawFile = fs.readFileSync(fullPath, 'utf-8');
     const { data, content } = matter(rawFile);
 
-    // Validate frontmatter strictly against Zod schema
     const parsedFrontmatter = PostFrontmatterSchema.parse(data);
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-    if (
-      parsedFrontmatter.heroImage &&
-      parsedFrontmatter.heroImage.startsWith('/') &&
-      !parsedFrontmatter.heroImage.startsWith('//') &&
-      basePath
-    ) {
-      parsedFrontmatter.heroImage = `${basePath}${parsedFrontmatter.heroImage}`;
-    }
     const { html, toc } = renderMarkdown(content);
-    const { readingTime, readingMinutes } = calculateReadingTime(content);
+    const readingTime = calculateReadingTime(content);
 
     return {
       slug,
@@ -45,7 +35,6 @@ export function getAllPosts(includeDrafts = false): Post[] {
       content,
       html,
       readingTime,
-      readingMinutes,
       toc,
     };
   });
@@ -67,15 +56,6 @@ export function getPostBySlug(slug: string): Post | undefined {
   return posts.find((post) => post.slug === slug);
 }
 
-export function getFeaturedPosts(limit = 3): Post[] {
-  const posts = getAllPosts();
-  const explicitFeatured = posts.filter((p) => p.frontmatter.featured);
-  if (explicitFeatured.length >= 2) {
-    return explicitFeatured.slice(0, limit);
-  }
-  return posts.slice(0, limit);
-}
-
 export function getAllTags(): { tag: string; count: number }[] {
   const posts = getAllPosts();
   const counts = new Map<string, number>();
@@ -90,4 +70,3 @@ export function getAllTags(): { tag: string; count: number }[] {
     .map(([tag, count]) => ({ tag, count }))
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }
-

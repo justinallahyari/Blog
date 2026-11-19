@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "cp resume/Justin_Allahyari_Resume.pdf public/Justin_Allahyari_Resume.pdf",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

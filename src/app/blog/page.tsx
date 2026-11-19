@@ -7,14 +7,14 @@ import { BlogExplorer } from "@/components/BlogExplorer";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "All articles on distributed systems, web architecture, Rust, TypeScript, and performance engineering.",
+    "Notes and write-ups on hybrid cloud administration, identity and access management (IAM), endpoint operations, and DoD CMMC Level 2 compliance.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: `Blog | ${siteConfig.shortName}`,
+    title: `Blog — ${siteConfig.shortName}`,
     description:
-      "All articles on distributed systems, web architecture, Rust, TypeScript, and performance engineering.",
+      "Notes and write-ups on hybrid cloud administration, identity and access management (IAM), endpoint operations, and DoD CMMC Level 2 compliance.",
     url: `${siteConfig.url}/blog`,
   },
 };
@@ -24,13 +24,17 @@ export default function BlogIndexPage() {
   const allTags = getAllTags();
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-3 border-b border-slate-200 dark:border-slate-800 pb-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          All Articles
+    <div className="space-y-10">
+      <header className="space-y-2.5 border-b border-line pb-6">
+        <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+          Writing
+        </p>
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
+          Blog
         </h1>
-        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
-          Reverse-chronological archive of deep dives, tutorials, and architectural notes. Filter by topic or search below.
+        <p className="text-[15.5px] leading-[1.7] text-ink-muted">
+          Practical notes on hybrid cloud administration, identity and access
+          management, endpoint operations, and compliance.
         </p>
       </header>
 
